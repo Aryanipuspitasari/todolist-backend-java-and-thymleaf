@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List App Use Java Backend and Thymleaf Spring</title>
+</head>
+<body>
+
+    <h1>Todo List</h1>
+    
+    <!-- Form untuk menambahkan todo -->
+    <form th:action="@{/todos}" method="post">
+        <input type="text" name="task" placeholder="Enter your new todo" required>
+        <button type="submit">Add To-Do</button>
+    </form>
+    
+    <!-- Daftar todo -->
+    <ul>
+        <li th:each="todo : ${todos}">
+            <span th:text="${todo.task}"></span>
+            
+            <!-- Form untuk menghapus todo -->
+            <form th:action="@{/todos/{id}(id=${todo.id})}" method="post" style="display:inline;">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    </ul>
+
+</body>
+</html>
